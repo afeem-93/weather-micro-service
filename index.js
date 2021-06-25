@@ -40,8 +40,8 @@ app.post('/get-weather-info', (req, res) => {
                 }
                 html += `<div style="float:${index === data.length - 1 ? 'right' : 'left'}; width:33%">
                     <p>Date: ${date.getDate()}/${date.getMonth()}/${date.getFullYear()}</p>
-                    <p>Maximum Temperature: ${day.main.temp_max}</p>
-                    <p>Minimum Temperature: ${day.main.temp_min}</p>
+                    <p>Maximum Temperature: ${day.main.temp_max} &#8451</p>
+                    <p>Minimum Temperature: ${day.main.temp_min} &#8451</p>
                     <p><b>${message}</b></p>
                 </div>`;
             });
