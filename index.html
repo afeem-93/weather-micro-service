@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sample Site</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <style>
+    body { padding-top: 50px; }
+  </style>
+  <script type="text/javascript">
+    async function getWeatherInfo(event) {
+        const formElements = document.getElementById("weather-form").elements;
+        const city = Array.from(formElements)[0].value;
+        if (!city || city.length === 0) {
+            alert("Please enter city name");
+            return;
+        }
+        const response = await fetch(`${window.location.origin}/get-weather-info`, {
+            method: 'POST', 
+            mode: 'cors', 
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            redirect: 'follow', 
+            referrerPolicy: 'no-referrer', 
+            body: JSON.stringify({city})
+        });
+        response.json()
+        .then(data => {
+            document.getElementById("response").innerHTML = data.data;
+        });
+    }
+</script>
+</head>
+<body>
+
+    <form id="weather-form" onsubmit="event.preventDefault(); getWeatherInfo(event);">
+        <label for="city">City name:</label><br>
+        <input type="text" id="city" name="city" placeholder="Enter city name" /><br>
+        <button type="submit">Submit form</button>
+    </form>
+    <div id="response">
+        
+    </div>
+
+</body>
+</html>
